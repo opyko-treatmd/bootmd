@@ -12,3 +12,8 @@ resource "null_resource" "example" {
     value = "A example resource that does nothing!"
   }
 }
+resource "null_resource" "ex" {
+  triggers = {
+    value = "A ex resource that does nothing!"
+  }
+}
