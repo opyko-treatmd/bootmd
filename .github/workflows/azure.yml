@@ -20,7 +20,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: ./auth0
+        working-directory: auth0
 
     steps:
     - name: Get tagName
