@@ -58,6 +58,5 @@ jobs:
             owner: context.repo.owner,
             repo: context.repo.repo,
             ref: 'refs/tags/${{ github.run_number }}'
-            # ref: 'refs/tags/${{ github.event.repository.updated_at}}',
             sha: context.sha
           })  
