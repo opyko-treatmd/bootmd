@@ -23,8 +23,12 @@ jobs:
         working-directory: ./auth0
 
     steps:
+    - name: Get tagName
+      id: tagName
+      run: echo "::set-output name=tagName::$(date +'%Y-%m-%d')"
+    
     # Checkout the repository to the GitHub Actions runner
-    - name: Checkout
+    - name: Checkoun
       uses: actions/checkout@v4
 
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
@@ -50,3 +54,13 @@ jobs:
     - name: Terraform Apply
       # if: github.ref == 'refs/heads/"main"' && github.event_name == 'push'
       run: terraform apply -auto-approve -input=false
+    - name: Create tag
+      uses: actions/github-script@v5
+      with:
+        script: |
+          github.rest.git.createRef({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            ref: 'refs/tags/${{ steps.tagName.outputs.tagName }}',
+            sha: context.sha
+          })  
