@@ -16,7 +16,6 @@ terraform {
     storage_account_name = "common4olekpyko202408"
     container_name       = "github-terraform"
     key                  = "terraform.tfstate"
-    access_key           = "XBc4+D5bVmvZRJmhS+HYiHYim3T7jEJ8Pgz0HRxI9Dx4DUzyKRmOXCeAqYggaOnOxs9Lo+FEpG5L+AStfX0ryg=="
   }
 }
 
