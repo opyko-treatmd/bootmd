@@ -12,10 +12,22 @@ env:
   ENVIRONMENT: develop
   
 jobs:
+  set-environment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set environment based on branch
+        run: |
+          if [[ $GITHUB_REF_NAME == 'master' ]]; then
+            echo "ENVIRONMENT=production" >> $GITHUB_ENV
+          elif [[ $GITHUB_REF_NAME == 'develop' ]]; then
+            echo "ENVIRONMENT=staging" >> $GITHUB_ENV
+          fi
+    
   terraform:
     name: 'Terraform'
     runs-on: ubuntu-latest
-    environment: develop
+    needs: set-environment
+    environment: ${{ env.ENVIRONMENT }}
     env:
       ARM_ACCESS_KEY: ${{ secrets.ARM_ACCESS_KEY }}
 
@@ -27,7 +39,7 @@ jobs:
 
     steps:
     # Checkout the repository to the GitHub Actions runner
-    - name: Checkoun
+    - name: Checkout ${{ env.ENVIRONMENT }}
       uses: actions/checkout@v4
 
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
