@@ -51,11 +51,12 @@ jobs:
       # if: github.ref == 'refs/heads/"main"' && github.event_name == 'push'
       run: terraform apply -auto-approve -input=false
     - name: Create tag
-      uses: actions/github-script@v6
+      uses: actions/github-script@v7
       with:
         script: |
           github.rest.git.createRef({
             owner: context.repo.owner,
             repo: context.repo.repo,
-            ref: 'refs/tags/${{ github.run_number }}'
+            ref: 'refs/tags/${{ github.run_number }}',
+            sha: context.sha
           })  
