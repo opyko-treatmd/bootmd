@@ -8,11 +8,14 @@ on:
 permissions:
   contents: write
 
+env:
+  ENVIRONMENT: develop
+  
 jobs:
   terraform:
     name: 'Terraform'
     runs-on: ubuntu-latest
-    environment: develop
+    environment: ${{ ENVIRONMENT }}
     env:
       ARM_ACCESS_KEY: ${{ secrets.ARM_ACCESS_KEY }}
 
