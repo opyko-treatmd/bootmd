@@ -27,7 +27,7 @@ jobs:
     name: 'Terraform'
     runs-on: ubuntu-latest
     needs: set-environment
-    environment: ${{ env.ENVIRONMENT }}
+    environment: develop
     env:
       ARM_ACCESS_KEY: ${{ secrets.ARM_ACCESS_KEY }}
 
