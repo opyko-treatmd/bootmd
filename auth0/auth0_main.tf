@@ -26,6 +26,6 @@ provider "auth0" {
 
 resource "null_resource" "main" {
   triggers = {
-    value = "trigger_value"
+    value = "trigger_value_main"
   }
 }
