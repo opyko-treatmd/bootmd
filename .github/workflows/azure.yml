@@ -23,10 +23,6 @@ jobs:
         working-directory: auth0
 
     steps:
-    - name: Get tagName
-      id: tagName
-      run: echo "::set-output name=tagName::$(date +'%Y-%m-%d')"
-    
     # Checkout the repository to the GitHub Actions runner
     - name: Checkoun
       uses: actions/checkout@v4
@@ -61,6 +57,6 @@ jobs:
           github.rest.git.createRef({
             owner: context.repo.owner,
             repo: context.repo.repo,
-            ref: 'refs/tags/${{ steps.tagName.outputs.tagName }}',
+            ref: 'refs/tags/${{ github.event.repository.updated_at}}',
             sha: context.sha
           })  
